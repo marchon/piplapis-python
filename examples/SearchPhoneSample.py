@@ -7,7 +7,7 @@ UserApiKey = 'jq9c88aa2pp7zu56u3d8r538'
 
 #####################################################
 #
-#  Usage: python SearchNameSample [filenameOfEmails]
+#  Usage: python SearchPhoneSample [filenameOfPhoneNumbers]
 #
 #  Will make a pipl lookup for each line in the file
 #  or via stdin if no file is specified
@@ -27,11 +27,10 @@ inputsource = file or sys.stdin
 
 for line in inputsource:
     whatToCheck = line.strip()
-    if whatToCheck.count('@') == 0:
-       continue
-    print "Checking Information for Email: (%s) "  % whatToCheck
+    whatToCheck = whatToCheck.replace('-','')
+    print "Checking Information for phone number : (%s) "  % whatToCheck
     Piplrequest = SearchAPIRequest(api_key=UserApiKey,
-                                   email=whatToCheck)
+                                   phone=whatToCheck)
     response = Piplrequest.send()
     Collection = response.group_records_by_domain()
     print Collection
